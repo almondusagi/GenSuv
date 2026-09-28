@@ -1,0 +1,42 @@
+{
+ "amber": {
+  "cols": 8,
+  "dirs": 4,
+  "cell": 160
+ },
+ "archer": {
+  "cols": 6,
+  "dirs": 4,
+  "cell": 160
+ },
+ "brute": {
+  "cols": 6,
+  "dirs": 4,
+  "cell": 160
+ },
+ "hilichurl": {
+  "cols": 6,
+  "dirs": 4,
+  "cell": 160
+ },
+ "ruin": {
+  "cols": 6,
+  "dirs": 4,
+  "cell": 160
+ },
+ "shaman": {
+  "cols": 6,
+  "dirs": 4,
+  "cell": 160
+ },
+ "slime": {
+  "cols": 6,
+  "dirs": 4,
+  "cell": 160
+ },
+ "venti": {
+  "cols": 6,
+  "dirs": 4,
+  "cell": 160
+ }
+}

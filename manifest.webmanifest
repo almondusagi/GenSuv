@@ -1,0 +1,46 @@
+{
+  "name": "モンドの風跡",
+  "short_name": "モンド",
+  "description": "原神の非公式ファンメイド・サバイバーゲーム",
+  "lang": "ja",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "fullscreen",
+  "display_override": [
+    "fullscreen",
+    "standalone"
+  ],
+  "orientation": "landscape",
+  "background_color": "#0b2029",
+  "theme_color": "#0b2029",
+  "icons": [
+    {
+      "src": "assets/app_icon_192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/app_icon_512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/app_icon_512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "assets/icon_amber.webp",
+      "sizes": "241x256",
+      "type": "image/webp",
+      "purpose": "any"
+    }
+  ],
+  "id": "./index.html",
+  "categories": [
+    "games"
+  ]
+}
