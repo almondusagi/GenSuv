@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="theme-color" content="#0b2029">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="description" content="原神の非公式ファンメイド・サバイバーゲーム">
+<title>モンドの風跡</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="assets/icon_amber.webp">
+<link rel="apple-touch-icon" href="assets/app_icon_180.png">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="モンド">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;800;900&family=Shippori+Mincho+B1:wght@700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<script>
+/* Portrait phones (iPhone with rotation lock, or inside an app that never rotates): run the game in a
+   landscape-sized iframe rotated 90deg. Inside the iframe everything (layout, touch coords, media queries)
+   behaves exactly like real landscape. The outer page does not boot its own game in this mode. */
+(function () {
+  var q = location.search || '';
+  if (/[?&]embed=1/.test(q)) { window.__MONDO_EMBED = true; document.documentElement.classList.add('embed'); return; }
+  var touch = false; try { touch = matchMedia('(pointer: coarse)').matches || 'ontouchstart' in window; } catch (e) { }
+  if (!touch || innerHeight <= innerWidth) return;
+  window.__MONDO_WRAP = true;
+  var ROT_KEY = 'mondo_rot_flip';
+  var flip = 0; try { flip = +localStorage.getItem(ROT_KEY) || 0; } catch (e) { }
+  var css = document.createElement('style');
+  css.textContent = 'html,body{margin:0;height:100%;overflow:hidden;background:#0b1422;overscroll-behavior:none;touch-action:none}' +
+    '#game,#ui,#touch,#rotate{display:none!important}' +
+    '#rw{position:fixed;left:env(safe-area-inset-left,0px);right:env(safe-area-inset-right,0px);top:env(safe-area-inset-top,0px);bottom:env(safe-area-inset-bottom,0px);overflow:hidden}' +
+    '#rw iframe{position:absolute;left:0;top:0;border:0;display:block;transform-origin:0 0;background:#0b1422}';
+  document.head.appendChild(css);
+  var sep = q ? '&' : '?';
+  function build() {
+    var box = document.createElement('div'); box.id = 'rw';
+    var f = document.createElement('iframe');
+    f.src = location.pathname + q + sep + 'embed=1';
+    f.setAttribute('allow', 'autoplay; fullscreen'); f.setAttribute('title', 'モンドの風跡');
+    box.appendChild(f); document.body.appendChild(box);
+    function lay() {
+      var w = box.clientWidth, h = box.clientHeight;
+      if (w >= h) { f.style.width = w + 'px'; f.style.height = h + 'px'; f.style.transform = 'none'; return; }
+      f.style.width = h + 'px'; f.style.height = w + 'px';
+      f.style.transform = flip ? 'translateY(' + h + 'px) rotate(-90deg)' : 'translateX(' + w + 'px) rotate(90deg)';
+    }
+    window.__mondoSetRot = function (v) { flip = v ? 1 : 0; try { localStorage.setItem(ROT_KEY, String(flip)); } catch (e) { } lay(); };
+    window.__mondoGetRot = function () { return flip; };
+    lay();
+    addEventListener('resize', lay); addEventListener('orientationchange', function () { setTimeout(lay, 250); });
+    if (window.visualViewport) visualViewport.addEventListener('resize', lay);
+    document.addEventListener('touchmove', function (e) { e.preventDefault(); }, { passive: false });
+  }
+  if (document.body) build(); else document.addEventListener('DOMContentLoaded', build);
+})();
+</script>
+<canvas id="game"></canvas>
+<div id="touch"></div>
+<div id="ui"></div>
+<div id="rotate"><div><div class="rot-logo">モンドの風跡</div><div class="rot-phone"></div>スマホを横にしてあそんでね<small>ゲームは一時停止しています</small></div></div>
+<noscript>JavaScript を有効にしてください。</noscript>
+<script src="js/core.js"></script>
+<script src="js/data.js"></script>
+<script src="js/input.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/fx.js"></script>
+<script src="js/render.js"></script>
+<script src="js/combat.js"></script>
+<script src="js/player.js"></script>
+<script src="js/enemies.js"></script>
+<script src="js/enemy_ai.js"></script>
+<script src="js/spawner.js"></script>
+<script src="js/weapons.js"></script>
+<script src="js/amber.js"></script>
+<script src="js/xingqiu.js"></script>
+<script src="js/barrier.js"></script>
+<script src="js/ningguang.js"></script>
+<script src="js/chongyun.js"></script>
+<script src="js/launchers.js"></script>
+<script src="js/loot.js"></script>
+<script src="js/progression.js"></script>
+<script src="js/upgrades.js"></script>
+<script src="js/relics.js"></script>
+<script src="js/game.js"></script>
+<script src="js/hud.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/levelup.js"></script>
+<script src="js/backdrop.js"></script>
+<script src="js/screens.js"></script>
+<script src="js/debug.js"></script>
+<script src="js/debugpanel.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
